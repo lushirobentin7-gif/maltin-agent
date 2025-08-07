@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maltin Agent – Demo</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;background:#f8fafc;color:#0f172a}
+    .header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0}
+    .brand{display:flex;gap:12px;align-items:center}.logo{font-size:28px}.tagline{color:#64748b;margin:0}
+    .cta{background:#0f172a;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none}
+    .container{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:960px){.container{grid-template-columns:1.3fr 1fr}}
+    .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px}
+    h1,h2,h3{margin:6px 0 12px}.row{display:flex;gap:8px}
+    .grid{display:grid;grid-template-columns:1fr;gap:8px}
+    @media(min-width:720px){.grid{grid-template-columns:1fr 1.2fr 0.8fr}}
+    input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px;outline:none}
+    button{background:#0f172a;color:#fff;border:none;padding:10px 14px;border-radius:10px;cursor:pointer}
+    button.outline{background:#fff;color:#0f172a;border:1px solid #0f172a} button:disabled{opacity:.6;cursor:default}
+    .chatlog{height:260px;overflow:auto;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:8px}
+    .msg{max-width:80%;padding:10px 12px;border-radius:14px;margin:6px 0}
+    .msg.user{background:#0f172a;color:#fff;margin-left:auto}.msg.agent{background:#e2e8f0;color:#0f172a}
+    .price-grid{display:grid;gap:12px;grid-template-columns:1fr}
+    @media(min-width:900px){.price-grid{grid-template-columns:repeat(3,1fr)}}
+    .price-card{border:1px solid #e2e8f0;border-radius:14px;padding:16px;position:relative}
+    .price-card.featured{border-width:2px;box-shadow:0 8px 18px rgba(2,6,23,.08)}
+    .badge{position:absolute;top:-10px;right:12px;background:#0f172a;color:#fff;padding:4px 8px;border-radius:999px;font-size:12px}
+    .price{font-size:28px;font-weight:700}.price span{font-size:14px;color:#64748b;margin-left:6px}
+    .hint{color:#64748b;font-size:14px}.footer{text-align:center;padding:24px;color:#64748b}
+  </style>
+</head>
+<body>
+<header class="header">
+  <div class="brand">
+    <div class="logo">🤖</div>
+    <div>
+      <h1>Maltin Agent</h1>
+      <p class="tagline">Chat • Voice (Demo) • Social • Organisation</p>
+    </div>
+  </div>
+  <a class="cta" href="#preise">Preise ansehen</a>
+</header>
+
+<main class="container">
+  <!-- Chat -->
+  <section class="card chat">
+    <h2>Chat</h2>
+    <div id="chatlog" class="chatlog">
+      <div class="msg agent">Hey! Ich bin der Maltin-Agent. Sag mir, was ich tun soll.</div>
+    </div>
+    <div class="row">
+      <input id="chatinput" placeholder="Schreib dem Agenten eine Aufgabe…"/>
+      <button id="sendbtn">Senden</button>
+      <button id="voicebtn">🎙 Voice (Demo)</button>
+    </div>
+  </section>
+
+  <!-- Preise -->
+  <section id="preise" class="card prices">
+    <h2>Preise</h2>
+    <div class="price-grid">
+      <div class="price-card">
+        <h3>Basic</h3>
+        <div class="price">CHF 79<span>/Monat</span></div>
+        <ul><li>Chatbot & Basis-Funktionen</li><li>E-Mail/Chat Antworten</li></ul>
+        <button class="outline">Demo anfragen</button>
+      </div>
+      <div class="price-card featured">
+        <div class="badge">Empfohlen</div>
+        <h3>Pro</h3>
+        <div class="price">CHF 149<span>/Monat</span></div>
+        <ul><li>Alles aus Basic</li><li>+ Social Media AI</li><li>+ Voice Agent (Demo)</li></ul>
+        <button>Demo anfragen</button>
+      </div>
+      <div class="price-card">
+        <h3>Business</h3>
+        <div class="price">CHF 299<span>/Monat</span></div>
+        <ul><li>Alles aus Pro</li><li>Branding & Einrichtung</li><li>Priorisierter Support</li></ul>
+        <button class="outline">Demo anfragen</button>
+      </div>
+    </div>
+    <p class="hint">Jährlich erhältlich (Rabatt). Stripe folgt in der Vollversion.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  <small>© 2025 Maltin Agent – Demo-Version (Simulation).</small>
+</footer>
+
+<script>
+  const chatlog = document.getElementById('chatlog');
+  const input = document.getElementById('chatinput');
+  const send = document.getElementById('sendbtn');
+  const voice = document.getElementById('voicebtn');
+  function addMsg(role, text){
+    const div = document.createElement('div');
+    div.className = 'msg ' + role;
+    div.textContent = text;
+    chatlog.appendChild(div);
+    chatlog.scrollTop = chatlog.scrollHeight;
+  }
+  send.onclick = () => {
+    const t = input.value.trim();
+    if(!t) return;
+    addMsg('user', t);
+    input.value='';
+    setTimeout(()=>{
+      const replies = [
+        'Klar! Ich übernehme das.',
+        'Ich habe eine To-do-Liste erstellt.',
+        'Hier ist ein Vorschlag.',
+        'Ich habe 3 Varianten generiert. Welcher Ton gefällt dir?'
+      ];
+      const r = replies[Math.floor(Math.random()*replies.length)];
+      addMsg('agent', r);
+    }, 600);
+  };
+  voice.onclick = () => {
+    addMsg('agent', '🎙️ (Demo) Stimme aktiv…');
+    setTimeout(()=> addMsg('agent','🛑 (Demo) Stimme gestoppt.'), 2000);
+  };
+</script>
+</body>
+</html>
