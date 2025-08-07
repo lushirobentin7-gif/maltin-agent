@@ -1,125 +1,136 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
   <title>Maltin Agent – Demo</title>
+  <meta name="description" content="AI-Agent Demo: Chat, Voice (Demo), Social & Organisation. Preise & Kontakt.">
+  <meta property="og:title" content="Maltin Agent – Demo">
+  <meta property="og:description" content="AI-Agent Demo: Chat, Voice (Demo), Social & Organisation.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0f172a">
   <style>
-    *{box-sizing:border-box} body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto;background:#f8fafc;color:#0f172a}
-    .header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0}
-    .brand{display:flex;gap:12px;align-items:center}.logo{font-size:28px}.tagline{color:#64748b;margin:0}
-    .cta{background:#0f172a;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none}
-    .container{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1fr;gap:16px}
-    @media(min-width:960px){.container{grid-template-columns:1.3fr 1fr}}
-    .card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px}
-    h1,h2,h3{margin:6px 0 12px}.row{display:flex;gap:8px}
-    .grid{display:grid;grid-template-columns:1fr;gap:8px}
-    @media(min-width:720px){.grid{grid-template-columns:1fr 1.2fr 0.8fr}}
-    input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:10px;outline:none}
-    button{background:#0f172a;color:#fff;border:none;padding:10px 14px;border-radius:10px;cursor:pointer}
-    button.outline{background:#fff;color:#0f172a;border:1px solid #0f172a} button:disabled{opacity:.6;cursor:default}
-    .chatlog{height:260px;overflow:auto;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:8px}
-    .msg{max-width:80%;padding:10px 12px;border-radius:14px;margin:6px 0}
-    .msg.user{background:#0f172a;color:#fff;margin-left:auto}.msg.agent{background:#e2e8f0;color:#0f172a}
-    .price-grid{display:grid;gap:12px;grid-template-columns:1fr}
-    @media(min-width:900px){.price-grid{grid-template-columns:repeat(3,1fr)}}
-    .price-card{border:1px solid #e2e8f0;border-radius:14px;padding:16px;position:relative}
-    .price-card.featured{border-width:2px;box-shadow:0 8px 18px rgba(2,6,23,.08)}
-    .badge{position:absolute;top:-10px;right:12px;background:#0f172a;color:#fff;padding:4px 8px;border-radius:999px;font-size:12px}
-    .price{font-size:28px;font-weight:700}.price span{font-size:14px;color:#64748b;margin-left:6px}
-    .hint{color:#64748b;font-size:14px}.footer{text-align:center;padding:24px;color:#64748b}
+    :root{
+      --bg:#f6f7fb;--panel:#ffffff;--ink:#0f172a;--muted:#64748b;--line:#e5e7eb;
+      --brand:#0f172a;--brand-ink:#ffffff;--radius:16px;--shadow:0 8px 18px rgba(2,6,23,.06)
+    }
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+         color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+    header{position:sticky;top:0;background:var(--panel);border-bottom:1px solid var(--line);
+           padding:14px 18px;z-index:10}
+    .wrap{max-width:1000px;margin:0 auto;padding:0 14px}
+    .brand{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .brand h1{font-size:clamp(22px,4.2vw,34px);margin:0}
+    .tag{color:var(--muted);font-size:14px;margin:2px 0 0}
+    .cta{background:var(--brand);color:var(--brand-ink);padding:10px 14px;border-radius:12px;
+         text-decoration:none;display:inline-block;white-space:nowrap}
+    main{max-width:1000px;margin:18px auto;padding:0 14px;display:grid;gap:14px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+    h2{margin:6px 0 12px}
+    /* Chat */
+    .chatlog{height:280px;overflow:auto;background:#f8fafc;border:1px solid var(--line);
+             border-radius:12px;padding:12px;margin-bottom:10px}
+    .msg{max-width:88%;padding:10px 12px;border-radius:14px;margin:6px 0;line-height:1.35}
+    .msg.agent{background:#e8edf3;color:#0f172a}
+    .msg.user{background:#0f172a;color:#fff;margin-left:auto}
+    .row{display:flex;gap:8px}
+    input{flex:1;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px}
+    button{background:var(--brand);color:#fff;border:none;border-radius:12px;padding:12px 14px;cursor:pointer}
+    button.secondary{background:#0f172a0d;color:var(--ink);border:1px solid var(--brand)}
+    /* Preise */
+    .grid{display:grid;gap:12px}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .price{font-size:28px;font-weight:800}
+    .hint{color:var(--muted);font-size:14px}
+    footer{color:var(--muted);text-align:center;padding:22px}
   </style>
 </head>
 <body>
-<header class="header">
-  <div class="brand">
-    <div class="logo">🤖</div>
-    <div>
-      <h1>Maltin Agent</h1>
-      <p class="tagline">Chat • Voice (Demo) • Social • Organisation</p>
+<header>
+  <div class="wrap brand">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div style="font-size:30px">🤖</div>
+      <div>
+        <h1>Maltin Agent</h1>
+        <div class="tag">Chat • Voice (Demo) • Social • Organisation</div>
+      </div>
     </div>
+    <a class="cta" href="#preise">Preise ansehen</a>
   </div>
-  <a class="cta" href="#preise">Preise ansehen</a>
 </header>
 
-<main class="container">
-  <!-- Chat -->
-  <section class="card chat">
+<main>
+  <section class="card">
     <h2>Chat</h2>
     <div id="chatlog" class="chatlog">
-      <div class="msg agent">Hey! Ich bin der Maltin-Agent. Sag mir, was ich tun soll.</div>
+      <div class="msg agent">Hey! Ich bin der Maltin‑Agent. Sag mir, was ich tun soll.</div>
     </div>
     <div class="row">
-      <input id="chatinput" placeholder="Schreib dem Agenten eine Aufgabe…"/>
+      <input id="chatinput" placeholder="Schreib dem Agenten eine Aufgabe…">
       <button id="sendbtn">Senden</button>
-      <button id="voicebtn">🎙 Voice (Demo)</button>
+      <button id="voicebtn" class="secondary">🎙 Voice (Demo)</button>
     </div>
   </section>
 
-  <!-- Preise -->
-  <section id="preise" class="card prices">
+  <section id="preise" class="card">
     <h2>Preise</h2>
-    <div class="price-grid">
-      <div class="price-card">
+    <div class="grid">
+      <div class="card" style="padding:14px">
         <h3>Basic</h3>
-        <div class="price">CHF 79<span>/Monat</span></div>
+        <div class="price">CHF 79<span class="hint">/Monat</span></div>
         <ul><li>Chatbot & Basis-Funktionen</li><li>E-Mail/Chat Antworten</li></ul>
-        <button class="outline">Demo anfragen</button>
+        <button class="secondary">Demo anfragen</button>
       </div>
-      <div class="price-card featured">
-        <div class="badge">Empfohlen</div>
-        <h3>Pro</h3>
-        <div class="price">CHF 149<span>/Monat</span></div>
+      <div class="card" style="padding:14px;outline:2px solid #0f172a10">
+        <h3>Pro <span class="hint">– Empfohlen</span></h3>
+        <div class="price">CHF 149<span class="hint">/Monat</span></div>
         <ul><li>Alles aus Basic</li><li>+ Social Media AI</li><li>+ Voice Agent (Demo)</li></ul>
         <button>Demo anfragen</button>
       </div>
-      <div class="price-card">
+      <div class="card" style="padding:14px">
         <h3>Business</h3>
-        <div class="price">CHF 299<span>/Monat</span></div>
+        <div class="price">CHF 299<span class="hint">/Monat</span></div>
         <ul><li>Alles aus Pro</li><li>Branding & Einrichtung</li><li>Priorisierter Support</li></ul>
-        <button class="outline">Demo anfragen</button>
+        <button class="secondary">Demo anfragen</button>
       </div>
     </div>
-    <p class="hint">Jährlich erhältlich (Rabatt). Stripe folgt in der Vollversion.</p>
+    <p class="hint">Jährlich buchbar (Rabatt). Stripe/Checkout folgt in der Vollversion.</p>
   </section>
 </main>
 
-<footer class="footer">
-  <small>© 2025 Maltin Agent – Demo-Version (Simulation).</small>
+<footer>
+  <small>© 2025 Maltin Agent – Demo (Simulation).</small>
 </footer>
 
 <script>
-  const chatlog = document.getElementById('chatlog');
+  const log = document.getElementById('chatlog');
   const input = document.getElementById('chatinput');
   const send = document.getElementById('sendbtn');
   const voice = document.getElementById('voicebtn');
-  function addMsg(role, text){
-    const div = document.createElement('div');
-    div.className = 'msg ' + role;
-    div.textContent = text;
-    chatlog.appendChild(div);
-    chatlog.scrollTop = chatlog.scrollHeight;
+
+  function add(role,text){
+    const el=document.createElement('div');
+    el.className='msg '+role; el.textContent=text;
+    log.appendChild(el); log.scrollTop=log.scrollHeight;
   }
   send.onclick = () => {
-    const t = input.value.trim();
-    if(!t) return;
-    addMsg('user', t);
-    input.value='';
+    const t = input.value.trim(); if(!t) return;
+    add('user', t); input.value='';
     setTimeout(()=>{
-      const replies = [
+      const r = [
         'Klar! Ich übernehme das.',
-        'Ich habe eine To-do-Liste erstellt.',
-        'Hier ist ein Vorschlag.',
-        'Ich habe 3 Varianten generiert. Welcher Ton gefällt dir?'
-      ];
-      const r = replies[Math.floor(Math.random()*replies.length)];
-      addMsg('agent', r);
-    }, 600);
+        'Ich habe eine To‑do‑Liste erstellt.',
+        'Hier ist ein Vorschlag – Feedback?',
+        'Ich habe 3 Varianten generiert (freundlich, professionell, sales).'
+      ][Math.floor(Math.random()*4)];
+      add('agent', r);
+    }, 500);
   };
-  voice.onclick = () => {
-    addMsg('agent', '🎙️ (Demo) Stimme aktiv…');
-    setTimeout(()=> addMsg('agent','🛑 (Demo) Stimme gestoppt.'), 2000);
-  };
+  voice.onclick = ()=>{ add('agent','🎙️ (Demo) Stimme aktiv…'); setTimeout(()=>add('agent','🛑 (Demo) Stimme gestoppt.'),1800); };
+
+  // Enter zum Senden
+  input.addEventListener('keydown',e=>{ if(e.key==='Enter') send.click(); });
 </script>
 </body>
 </html>
