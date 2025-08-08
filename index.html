@@ -3,100 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wähle dein Abo</title>
+  <title>Maltin Agent – Preise</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f5f7fa;
-      color: #333;
+      background-color: #0f172a;
+      color: white;
       text-align: center;
     }
 
     h1 {
-      margin: 20px 0;
-      font-size: 2rem;
+      margin-top: 20px;
+      font-size: 1.8rem;
+    }
+
+    p.subtext {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 30px;
     }
 
     .container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
       max-width: 500px;
       margin: 0 auto;
       padding: 20px;
     }
 
     .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background-color: #1e293b;
+      border-radius: 14px;
       padding: 20px;
-    }
-
-    .card h3 {
-      margin-top: 0;
-      font-size: 1.4rem;
-    }
-
-    .card p {
-      font-size: 0.95rem;
-      color: #666;
       margin-bottom: 20px;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .basic-badge { background-color: #0ea5e9; }
+    .pro-badge { background-color: #fbbf24; color: black; }
+    .premium-badge { background-color: #ef4444; }
+
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+
+    .per {
+      font-size: 1rem;
+      color: #94a3b8;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+
+    ul li {
+      padding-left: 15px;
+      position: relative;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #38bdf8;
     }
 
     .btn {
-      display: inline-block;
-      padding: 12px 20px;
+      display: block;
+      text-align: center;
+      padding: 12px;
       border-radius: 8px;
-      color: white;
       font-weight: bold;
       text-decoration: none;
-      transition: background 0.3s ease;
+      margin-top: 15px;
     }
 
-    .basic { background: #007bff; }
-    .basic:hover { background: #0056b3; }
+    .basic-btn { background-color: #0ea5e9; color: white; }
+    .basic-btn:hover { background-color: #0284c7; }
 
-    .pro { background: #28a745; }
-    .pro:hover { background: #1e7e34; }
+    .pro-btn { background-color: #22c55e; color: white; }
+    .pro-btn:hover { background-color: #15803d; }
 
-    .premium { background: #ff9800; }
-    .premium:hover { background: #e68900; }
+    .premium-btn { background-color: #f97316; color: white; }
+    .premium-btn:hover { background-color: #c2410c; }
+
+    .payment-note {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Wähle dein Abo</h1>
-
   <div class="container">
+    <h1>Wähle dein Abo</h1>
+    <p class="subtext">Sichere Zahlung über Payrexx – Karte, TWINT, PayPal & mehr. Monatlich kündbar.</p>
+
     <!-- BASIC -->
     <div class="card">
-      <h3>Basic – CHF 79 / Monat</h3>
-      <p>Für Einsteiger & Solo-Unternehmer – Ideal für den Start</p>
-      <a class="btn basic" href="https://maltinagent.payrexx.com/de-CH/?payment=033043b339f86e5b65cba0226d1c9c03" target="_blank">
-        Jetzt Basic abonnieren
-      </a>
+      <span class="badge basic-badge">Basic</span>
+      <div class="price">CHF 79 <span class="per">/ Monat</span></div>
+      <p>Für Einsteiger & Solo-Unternehmer – ideal für den Start.</p>
+      <ul>
+        <li>Standard-Aufgaben & Support per E-Mail</li>
+        <li>Basis Social-Media-Plan (wöchentlich)</li>
+        <li>Einfache Automationen</li>
+      </ul>
+      <a class="btn basic-btn" href="https://maltinagent.payrexx.com/de-CH/?payment=033043b339f86e5b65cba0226d1c9c03" target="_blank">Jetzt Basic abonnieren</a>
+      <div class="payment-note">Bezahlen mit Karte · TWINT · PayPal</div>
     </div>
 
     <!-- PRO -->
     <div class="card">
-      <h3>Pro – CHF 149 / Monat</h3>
-      <p>Empfohlen – Mehr Aufgaben & erweiterte Funktionen</p>
-      <a class="btn pro" href="https://maltinagent.payrexx.com/de-CH/?payment=0b71377c99defd5311129f298a4fd154" target="_blank">
-        Jetzt Pro abonnieren
-      </a>
+      <span class="badge pro-badge">Empfohlen</span>
+      <div class="price">CHF 149 <span class="per">/ Monat</span></div>
+      <p>Empfohlen – Mehr Aufgaben & erweiterte Funktionen.</p>
+      <ul>
+        <li>Alle Basic-Leistungen</li>
+        <li>Erweiterte Automationen</li>
+        <li>Social-Media-Plan (3x pro Woche)</li>
+      </ul>
+      <a class="btn pro-btn" href="https://maltinagent.payrexx.com/de-CH/?payment=0b71377c99defd5311129f298a4fd154" target="_blank">Jetzt Pro abonnieren</a>
+      <div class="payment-note">Bezahlen mit Karte · TWINT · PayPal</div>
     </div>
 
     <!-- PREMIUM -->
     <div class="card">
-      <h3>Premium – CHF 299 / Monat</h3>
-      <p>Alles inklusive & VIP-Support – Die beste Wahl</p>
-      <a class="btn premium" href="https://maltinagent.payrexx.com/de-CH/?payment=f3556dafba52eb42b3a1a048f928742c" target="_blank">
-        Jetzt Premium abonnieren
-      </a>
+      <span class="badge premium-badge">Premium</span>
+      <div class="price">CHF 299 <span class="per">/ Monat</span></div>
+      <p>Alles inklusive & VIP-Support – Die beste Wahl.</p>
+      <ul>
+        <li>Alle Pro-Leistungen</li>
+        <li>VIP-Support 24/7</li>
+        <li>Unlimitierte Aufgaben</li>
+      </ul>
+      <a class="btn premium-btn" href="https://maltinagent.payrexx.com/de-CH/?payment=f3556dafba52eb42b3a1a048f928742c" target="_blank">Jetzt Premium abonnieren</a>
+      <div class="payment-note">Bezahlen mit Karte · TWINT · PayPal</div>
     </div>
+
   </div>
 
 </body>
