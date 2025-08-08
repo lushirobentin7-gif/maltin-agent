@@ -1,148 +1,215 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wähle dein Abo – Maltin Agent</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #0d1117;
-        color: #ffffff;
-        margin: 0;
-        padding: 0;
-    }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-    h1 {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 2em;
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d1117;
+    color: #e1e4e8;
+    margin: 0;
+    padding: 0;
+  }
 
-    p.subtitle {
-        text-align: center;
-        color: #9ba3b4;
-        font-size: 1em;
-        margin-bottom: 30px;
-    }
+  h1 {
+    text-align: center;
+    margin: 3rem 0 0.5rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -0.02em;
+  }
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        max-width: 500px;
-        margin: auto;
-        padding: 20px;
-    }
+  p.subtitle {
+    text-align: center;
+    color: #8b949e;
+    font-size: 1.125rem;
+    margin-bottom: 3rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .card {
-        background-color: #161b22;
-        border-radius: 12px;
-        padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
+  .container {
+    max-width: 480px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 
-    .label {
-        display: inline-block;
-        padding: 5px 12px;
-        border-radius: 12px;
-        font-size: 0.9em;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+  .card {
+    background-color: #161b22;
+    border-radius: 16px;
+    padding: 2rem 2.5rem;
+    box-shadow:
+      0 4px 8px rgb(3 102 214 / 0.2),
+      0 2px 4px rgb(0 0 0 / 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .basic { background-color: #007bff; }
-    .pro { background-color: #28a745; }
-    .premium { background-color: #ff9800; }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 12px 20px rgb(3 102 214 / 0.35),
+      0 8px 12px rgb(0 0 0 / 0.4);
+  }
 
+  .label {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .basic {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    color: #fff;
+  }
+
+  .pro {
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+    color: #fff;
+  }
+
+  .premium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #fff;
+  }
+
+  .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 0.2rem;
+    letter-spacing: -0.02em;
+  }
+
+  .month {
+    font-size: 1.1rem;
+    color: #8b949e;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #c9d1d9;
+    line-height: 1.6;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    color: #c9d1d9;
+    margin: 0 0 1.8rem 1.2rem;
+    padding: 0;
+    list-style-type: disc;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgb(0 0 0 / 0.2);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn:hover {
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.35);
+    transform: translateY(-3px);
+  }
+
+  .btn-basic {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  }
+
+  .btn-pro {
+    background: linear-gradient(135deg, #22c55e, #4ade80);
+  }
+
+  .btn-premium {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  }
+
+  .payment-info {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #8b949e;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
     .price {
-        font-size: 1.8em;
-        font-weight: bold;
-        margin: 5px 0;
-    }
-
-    .month {
-        font-size: 1em;
-        color: #9ba3b4;
-    }
-
-    ul {
-        list-style: disc;
-        margin-left: 20px;
-        color: #c9d1d9;
+      font-size: 2rem;
     }
 
     .btn {
-        display: block;
-        text-align: center;
-        padding: 12px;
-        margin-top: 15px;
-        border-radius: 8px;
-        font-weight: bold;
-        text-decoration: none;
-        color: white;
+      font-size: 1rem;
     }
-
-    .btn-basic { background-color: #007bff; }
-    .btn-pro { background-color: #28a745; }
-    .btn-premium { background-color: #ff9800; }
-
-    .payment-info {
-        font-size: 0.9em;
-        text-align: center;
-        color: #9ba3b4;
-        margin-top: 10px;
-    }
+  }
 </style>
 </head>
 <body>
 
 <h1>Wähle dein Abo</h1>
-<p class="subtitle">Sichere Zahlung über Payrexx – Karte, TWINT, PayPal & mehr. Monatlich kündbar.</p>
+<p class="subtitle">Sichere Zahlung über Payrexx – Karte, TWINT, PayPal &amp; mehr. Monatlich kündbar.</p>
 
 <div class="container">
 
-    <!-- Basic -->
-    <div class="card">
-        <span class="label basic">Basic</span>
-        <div class="price">CHF 79 <span class="month">/ Monat</span></div>
-        <p>Für Einsteiger & Solo-Unternehmer – ideal für den Start.</p>
-        <ul>
-            <li>Standard-Aufgaben & Support per E-Mail</li>
-            <li>Basis Social-Media-Plan (wöchentlich)</li>
-            <li>Einfache Automationen</li>
-        </ul>
-        <a class="btn btn-basic" href="https://maltinagent.payrexx.com/de-CH/?payment=033043b339f86e5b65cba0226d1c9c03" target="_blank">Jetzt Basic abonnieren</a>
-        <p class="payment-info">Bezahlen mit Karte • TWINT • PayPal</p>
-    </div>
+  <!-- Basic -->
+  <div class="card">
+    <span class="label basic">Basic</span>
+    <div class="price">CHF 79 <span class="month">/ Monat</span></div>
+    <p>Für Einsteiger &amp; Solo-Unternehmer – ideal für den Start.</p>
+    <ul>
+      <li>Standard-Aufgaben &amp; Support per E-Mail</li>
+      <li>Basis Social-Media-Plan (wöchentlich)</li>
+      <li>Einfache Automationen</li>
+    </ul>
+    <a class="btn btn-basic" href="https://maltinagent.payrexx.com/de-CH/?payment=033043b339f86e5b65cba0226d1c9c03" target="_blank" rel="noopener noreferrer">Jetzt Basic abonnieren</a>
+    <p class="payment-info">Bezahlen mit Karte • TWINT • PayPal</p>
+  </div>
 
-    <!-- Pro -->
-    <div class="card">
-        <span class="label pro">Empfohlen</span>
-        <div class="price">CHF 149 <span class="month">/ Monat</span></div>
-        <p>Empfohlen – Mehr Aufgaben & erweiterte Funktionen.</p>
-        <ul>
-            <li>Erweiterte Aufgaben & Prioritätssupport</li>
-            <li>Social-Media-Plan (mehrere Plattformen)</li>
-            <li>Fortgeschrittene Automationen</li>
-        </ul>
-        <a class="btn btn-pro" href="https://maltinagent.payrexx.com/de-CH/?payment=0b71377c99defd5311129f298a4fd154" target="_blank">Jetzt Pro abonnieren</a>
-        <p class="payment-info">Bezahlen mit Karte • TWINT • PayPal</p>
-    </div>
+  <!-- Pro -->
+  <div class="card">
+    <span class="label pro">Empfohlen</span>
+    <div class="price">CHF 149 <span class="month">/ Monat</span></div>
+    <p>Empfohlen – Mehr Aufgaben &amp; erweiterte Funktionen.</p>
+    <ul>
+      <li>Erweiterte Aufgaben &amp; Prioritätssupport</li>
+      <li>Social-Media-Plan (mehrere Plattformen)</li>
+      <li>Fortgeschrittene Automationen</li>
+    </ul>
+    <a class="btn btn-pro" href="https://maltinagent.payrexx.com/de-CH/?payment=0b71377c99defd5311129f298a4fd154" target="_blank" rel="noopener noreferrer">Jetzt Pro abonnieren</a>
+    <p class="payment-info">Bezahlen mit Karte • TWINT • PayPal</p>
+  </div>
 
-    <!-- Premium -->
-    <div class="card">
-        <span class="label premium">Premium</span>
-        <div class="price">CHF 299 <span class="month">/ Monat</span></div>
-        <p>Alles inklusive & VIP-Support – die beste Wahl.</p>
-        <ul>
-            <li>Alle Pro-Funktionen + unbegrenzte Aufgaben</li>
-            <li>Individuelle Social-Media-Strategie</li>
-            <li>Premium Automationen & Integrationen</li>
-        </ul>
-        <a class="btn btn-premium" href="https://maltinagent.payrexx.com/de-CH/?payment=f3556dafba52eb42b3a1a048f928742c" target="_blank">Jetzt Premium abonnieren</a>
-        <p class="payment-info">Bezahlen mit Karte • TWINT • PayPal</p>
-    </div>
+  <!-- Premium -->
+  <div class="card">
+    <span class="label premium">Premium</span>
+    <div class="price">CHF 299 <span class="month">/ Monat</span></div>
+    <p>Alles inklusive &amp; VIP-Support – die beste Wahl.</p>
+    <ul>
+      <li>Alle Pro-Funktionen + unbegrenzte Aufgaben</li>
+      <li>Individuelle Social-Media-Strategie</li>
+      <li>Premium Automationen &amp; Integrationen</li>
+    </ul>
+    <a class="btn btn-premium" href="https://maltinagent.payrexx.com/de-CH/?payment=f3556dafba52eb42b3a1a048f928742c" target="_blank" rel="noopener noreferrer">Jetzt Premium abonnieren</a>
+    <p class="payment-info">Bezahlen mit Karte • TWINT • PayPal</p>
+  </div>
 
 </div>
 
